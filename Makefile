@@ -11,3 +11,11 @@ generate:
 	@echo running code generation
 	@go generate ./...
 	@echo done
+
+up:
+	@docker compose up -d
+
+down:
+	@docker compose down
+
+.PHONY: install-tools generate up down

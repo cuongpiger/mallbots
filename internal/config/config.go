@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/kelseyhightower/envconfig"
-
 	"github.com/stackus/dotenv"
 
 	"github.com/cuongpiger/mallbots/internal/rpc"

@@ -18,12 +18,12 @@ import (
 	"github.com/cuongpiger/mallbots/internal/rpc"
 	"github.com/cuongpiger/mallbots/internal/waiter"
 	"github.com/cuongpiger/mallbots/internal/web"
-	// "github.com/cuongpiger/mallbots/baskets"
-	// "github.com/cuongpiger/mallbots/depot"
-	// "github.com/cuongpiger/mallbots/notifications"
-	// "github.com/cuongpiger/mallbots/ordering"
-	// "github.com/cuongpiger/mallbots/payments"
-	// "github.com/cuongpiger/mallbots/stores"
+	"github.com/cuongpiger/mallbots/baskets"
+	"github.com/cuongpiger/mallbots/depot"
+	"github.com/cuongpiger/mallbots/notifications"
+	"github.com/cuongpiger/mallbots/ordering"
+	"github.com/cuongpiger/mallbots/payments"
+	"github.com/cuongpiger/mallbots/stores"
 )
 
 func main() {
@@ -64,13 +64,13 @@ func run() (err error) {
 
 	// init modules
 	m.modules = []monolith.Module{
-		// &baskets.Module{},
+		&baskets.Module{},
 		&customers.Module{},
-		// &depot.Module{},
-		// &notifications.Module{},
-		// &ordering.Module{},
-		// &payments.Module{},
-		// &stores.Module{},
+		&depot.Module{},
+		&notifications.Module{},
+		&ordering.Module{},
+		&payments.Module{},
+		&stores.Module{},
 	}
 
 	if err = m.startupModules(); err != nil {
