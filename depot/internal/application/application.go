@@ -6,6 +6,7 @@ import (
 	"github.com/cuongpiger/mallbots/depot/internal/application/commands"
 	"github.com/cuongpiger/mallbots/depot/internal/application/queries"
 	"github.com/cuongpiger/mallbots/depot/internal/domain"
+	"github.com/cuongpiger/mallbots/internal/ddd"
 )
 
 type (
@@ -40,13 +41,15 @@ type (
 
 var _ App = (*Application)(nil)
 
-func New(shoppingLists domain.ShoppingListRepository, stores domain.StoreRepository, products domain.ProductRepository, orders domain.OrderRepository) *Application {
+func New(shoppingLists domain.ShoppingListRepository, stores domain.StoreRepository, products domain.ProductRepository,
+	domainPublisher ddd.EventPublisher,
+) *Application {
 	return &Application{
 		appCommands: appCommands{
-			CreateShoppingListHandler:   commands.NewCreateShoppingListHandler(shoppingLists, stores, products),
-			CancelShoppingListHandler:   commands.NewCancelShoppingListHandler(shoppingLists),
-			AssignShoppingListHandler:   commands.NewAssignShoppingListHandler(shoppingLists),
-			CompleteShoppingListHandler: commands.NewCompleteShoppingListHandler(shoppingLists, orders),
+			CreateShoppingListHandler:   commands.NewCreateShoppingListHandler(shoppingLists, stores, products, domainPublisher),
+			CancelShoppingListHandler:   commands.NewCancelShoppingListHandler(shoppingLists, domainPublisher),
+			AssignShoppingListHandler:   commands.NewAssignShoppingListHandler(shoppingLists, domainPublisher),
+			CompleteShoppingListHandler: commands.NewCompleteShoppingListHandler(shoppingLists, domainPublisher),
 		},
 		appQueries: appQueries{
 			GetShoppingListHandler: queries.NewGetShoppingListHandler(shoppingLists),
