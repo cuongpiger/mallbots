@@ -3,6 +3,7 @@ package application
 import (
 	"context"
 
+	"github.com/cuongpiger/mallbots/internal/ddd"
 	"github.com/cuongpiger/mallbots/ordering/internal/application/commands"
 	"github.com/cuongpiger/mallbots/ordering/internal/application/queries"
 	"github.com/cuongpiger/mallbots/ordering/internal/domain"
@@ -41,15 +42,14 @@ type (
 var _ App = (*Application)(nil)
 
 func New(orders domain.OrderRepository, customers domain.CustomerRepository, payments domain.PaymentRepository,
-	invoices domain.InvoiceRepository, shopping domain.ShoppingRepository,
-	notifications domain.NotificationRepository,
+	shopping domain.ShoppingRepository, domainPublisher ddd.EventPublisher,
 ) *Application {
 	return &Application{
 		appCommands: appCommands{
-			CreateOrderHandler:   commands.NewCreateOrderHandler(orders, customers, payments, shopping, notifications),
-			CancelOrderHandler:   commands.NewCancelOrderHandler(orders, shopping, notifications),
-			ReadyOrderHandler:    commands.NewReadyOrderHandler(orders, invoices, notifications),
-			CompleteOrderHandler: commands.NewCompleteOrderHandler(orders),
+			CreateOrderHandler:   commands.NewCreateOrderHandler(orders, customers, payments, shopping, domainPublisher),
+			CancelOrderHandler:   commands.NewCancelOrderHandler(orders, shopping, domainPublisher),
+			ReadyOrderHandler:    commands.NewReadyOrderHandler(orders, domainPublisher),
+			CompleteOrderHandler: commands.NewCompleteOrderHandler(orders, domainPublisher),
 		},
 		appQueries: appQueries{
 			GetOrderHandler: queries.NewGetOrderHandler(orders),
