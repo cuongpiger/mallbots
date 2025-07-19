@@ -3,6 +3,7 @@ package stores
 import (
 	"context"
 
+	"github.com/cuongpiger/mallbots/internal/ddd"
 	"github.com/cuongpiger/mallbots/internal/monolith"
 	"github.com/cuongpiger/mallbots/stores/internal/application"
 	"github.com/cuongpiger/mallbots/stores/internal/grpc"
@@ -16,13 +17,14 @@ type Module struct {
 
 func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) error {
 	// setup Driven adapters
+	domainDispatcher := ddd.NewEventDispatcher()
 	stores := postgres.NewStoreRepository("stores.stores", mono.DB())
 	participatingStores := postgres.NewParticipatingStoreRepository("stores.stores", mono.DB())
 	products := postgres.NewProductRepository("stores.products", mono.DB())
 
 	// setup application
 	var app application.App
-	app = application.New(stores, participatingStores, products)
+	app = application.New(stores, participatingStores, products, domainDispatcher)
 	app = logging.LogApplicationAccess(app, mono.Logger())
 
 	// setup Driver adapters

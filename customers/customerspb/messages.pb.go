@@ -99,8 +99,8 @@ const file_customerspb_messages_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"sms_number\x18\x03 \x01(\tR\tsmsNumber\x12\x18\n" +
-	"\aenabled\x18\x04 \x01(\bR\aenabledB\xae\x01\n" +
-	"\x0fcom.customerspbB\rMessagesProtoP\x01Z@github.com/cuongpiger/mallbots/customers/customerspb/customerspb\xa2\x02\x03CXX\xaa\x02\vCustomerspb\xca\x02\vCustomerspb\xe2\x02\x17Customerspb\\GPBMetadata\xea\x02\vCustomerspbb\x06proto3"
+	"\aenabled\x18\x04 \x01(\bR\aenabledB\x9d\x01\n" +
+	"\x0fcom.customerspbB\rMessagesProtoP\x01Z/eda-in-golang/customers/customerspb/customerspb\xa2\x02\x03CXX\xaa\x02\vCustomerspb\xca\x02\vCustomerspb\xe2\x02\x17Customerspb\\GPBMetadata\xea\x02\vCustomerspbb\x06proto3"
 
 var (
 	file_customerspb_messages_proto_rawDescOnce sync.Once

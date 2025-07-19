@@ -474,8 +474,8 @@ const file_customerspb_api_proto_rawDesc = "" +
 	"\x11AuthorizeCustomer\x12%.customerspb.AuthorizeCustomerRequest\x1a&.customerspb.AuthorizeCustomerResponse\"\x00\x12R\n" +
 	"\vGetCustomer\x12\x1f.customerspb.GetCustomerRequest\x1a .customerspb.GetCustomerResponse\"\x00\x12[\n" +
 	"\x0eEnableCustomer\x12\".customerspb.EnableCustomerRequest\x1a#.customerspb.EnableCustomerResponse\"\x00\x12^\n" +
-	"\x0fDisableCustomer\x12#.customerspb.DisableCustomerRequest\x1a$.customerspb.DisableCustomerResponse\"\x00B\xa9\x01\n" +
-	"\x0fcom.customerspbB\bApiProtoP\x01Z@github.com/cuongpiger/mallbots/customers/customerspb/customerspb\xa2\x02\x03CXX\xaa\x02\vCustomerspb\xca\x02\vCustomerspb\xe2\x02\x17Customerspb\\GPBMetadata\xea\x02\vCustomerspbb\x06proto3"
+	"\x0fDisableCustomer\x12#.customerspb.DisableCustomerRequest\x1a$.customerspb.DisableCustomerResponse\"\x00B\x98\x01\n" +
+	"\x0fcom.customerspbB\bApiProtoP\x01Z/eda-in-golang/customers/customerspb/customerspb\xa2\x02\x03CXX\xaa\x02\vCustomerspb\xca\x02\vCustomerspb\xe2\x02\x17Customerspb\\GPBMetadata\xea\x02\vCustomerspbb\x06proto3"
 
 var (
 	file_customerspb_api_proto_rawDescOnce sync.Once
