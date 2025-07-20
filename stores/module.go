@@ -3,8 +3,10 @@ package stores
 import (
 	"context"
 
+	"github.com/cuongpiger/mallbots/internal/am"
 	"github.com/cuongpiger/mallbots/internal/ddd"
 	"github.com/cuongpiger/mallbots/internal/es"
+	"github.com/cuongpiger/mallbots/internal/jetstream"
 	"github.com/cuongpiger/mallbots/internal/monolith"
 	pg "github.com/cuongpiger/mallbots/internal/postgres"
 	"github.com/cuongpiger/mallbots/internal/registry"
@@ -16,18 +18,22 @@ import (
 	"github.com/cuongpiger/mallbots/stores/internal/logging"
 	"github.com/cuongpiger/mallbots/stores/internal/postgres"
 	"github.com/cuongpiger/mallbots/stores/internal/rest"
+	"github.com/cuongpiger/mallbots/stores/storespb"
 )
 
 type Module struct {
 }
 
-func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) error {
+func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) (err error) {
 	// setup Driven adapters
 	reg := registry.New()
-	err := registrations(reg)
-	if err != nil {
+	if err = registrations(reg); err != nil {
 		return err
 	}
+	if err = storespb.Registrations(reg); err != nil {
+		return err
+	}
+	eventStream := am.NewEventStream(reg, jetstream.NewStream(mono.Config().Nats.Stream, mono.JS()))
 	domainDispatcher := ddd.NewEventDispatcher[ddd.AggregateEvent]()
 	aggregateStore := es.AggregateStoreWithMiddleware(
 		pg.NewEventStore("stores.events", mono.DB(), reg),
@@ -52,6 +58,10 @@ func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) error {
 		application.NewMallHandlers(mall),
 		"Mall", mono.Logger(),
 	)
+	integrationEventHandlers := logging.LogEventHandlerAccess[ddd.AggregateEvent](
+		application.NewIntegrationEventHandlers(eventStream),
+		"IntegrationEvents", mono.Logger(),
+	)
 
 	// setup Driver adapters
 	if err := grpc.RegisterServer(ctx, app, mono.RPC()); err != nil {
@@ -65,6 +75,7 @@ func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) error {
 	}
 	handlers.RegisterCatalogHandlers(catalogHandlers, domainDispatcher)
 	handlers.RegisterMallHandlers(mallHandlers, domainDispatcher)
+	handlers.RegisterIntegrationEventHandlers(integrationEventHandlers, domainDispatcher)
 
 	return nil
 }

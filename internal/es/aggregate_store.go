@@ -32,6 +32,5 @@ func AggregateStoreWithMiddleware(store AggregateStore, mws ...AggregateStoreMid
 	for i := len(mws) - 1; i >= 0; i-- {
 		s = mws[i](s)
 	}
-
 	return s
 }
