@@ -2,23 +2,23 @@ package postgres
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
 
 	"github.com/stackus/errors"
 
+	"github.com/cuongpiger/mallbots/internal/postgres"
 	"github.com/cuongpiger/mallbots/payments/internal/application"
 	"github.com/cuongpiger/mallbots/payments/internal/models"
 )
 
 type InvoiceRepository struct {
 	tableName string
-	db        *sql.DB
+	db        postgres.DB
 }
 
 var _ application.InvoiceRepository = (*InvoiceRepository)(nil)
 
-func NewInvoiceRepository(tableName string, db *sql.DB) InvoiceRepository {
+func NewInvoiceRepository(tableName string, db postgres.DB) InvoiceRepository {
 	return InvoiceRepository{
 		tableName: tableName,
 		db:        db,

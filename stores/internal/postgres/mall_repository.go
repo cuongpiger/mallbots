@@ -7,17 +7,18 @@ import (
 
 	"github.com/stackus/errors"
 
+	"github.com/cuongpiger/mallbots/internal/postgres"
 	"github.com/cuongpiger/mallbots/stores/internal/domain"
 )
 
 type MallRepository struct {
 	tableName string
-	db        *sql.DB
+	db        postgres.DB
 }
 
 var _ domain.MallRepository = (*MallRepository)(nil)
 
-func NewMallRepository(tableName string, db *sql.DB) MallRepository {
+func NewMallRepository(tableName string, db postgres.DB) MallRepository {
 	return MallRepository{
 		tableName: tableName,
 		db:        db,

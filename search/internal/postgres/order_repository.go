@@ -3,7 +3,6 @@ package postgres
 import (
 	"bytes"
 	"context"
-	"database/sql"
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
@@ -11,18 +10,19 @@ import (
 
 	"github.com/stackus/errors"
 
+	"github.com/cuongpiger/mallbots/internal/postgres"
 	"github.com/cuongpiger/mallbots/search/internal/application"
 	"github.com/cuongpiger/mallbots/search/internal/models"
 )
 
 type OrderRepository struct {
 	tableName string
-	db        *sql.DB
+	db        postgres.DB
 }
 
 var _ application.OrderRepository = (*OrderRepository)(nil)
 
-func NewOrderRepository(tableName string, db *sql.DB) OrderRepository {
+func NewOrderRepository(tableName string, db postgres.DB) OrderRepository {
 	return OrderRepository{
 		tableName: tableName,
 		db:        db,

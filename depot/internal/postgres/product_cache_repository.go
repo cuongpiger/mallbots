@@ -10,17 +10,18 @@ import (
 	"github.com/stackus/errors"
 
 	"github.com/cuongpiger/mallbots/depot/internal/domain"
+	"github.com/cuongpiger/mallbots/internal/postgres"
 )
 
 type ProductCacheRepository struct {
 	tableName string
-	db        *sql.DB
+	db        postgres.DB
 	fallback  domain.ProductRepository
 }
 
 var _ domain.ProductCacheRepository = (*ProductCacheRepository)(nil)
 
-func NewProductCacheRepository(tableName string, db *sql.DB, fallback domain.ProductRepository) ProductCacheRepository {
+func NewProductCacheRepository(tableName string, db postgres.DB, fallback domain.ProductRepository) ProductCacheRepository {
 	return ProductCacheRepository{
 		tableName: tableName,
 		db:        db,

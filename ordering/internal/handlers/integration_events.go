@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/cuongpiger/mallbots/baskets/basketspb"
+	"github.com/cuongpiger/mallbots/depot/depotpb"
 	"github.com/cuongpiger/mallbots/internal/am"
 	"github.com/cuongpiger/mallbots/internal/ddd"
 	"github.com/cuongpiger/mallbots/ordering/internal/application"
@@ -35,6 +36,10 @@ func RegisterIntegrationEventHandlers(subscriber am.EventSubscriber, handlers dd
 		return err
 	}
 
+	err = subscriber.Subscribe(depotpb.ShoppingListAggregateChannel, evtMsgHandler, am.MessageFilter{
+		depotpb.ShoppingListCompletedEvent,
+	}, am.GroupName("ordering-depot"))
+
 	return
 }
 
@@ -42,6 +47,8 @@ func (h integrationHandlers[T]) HandleEvent(ctx context.Context, event T) error 
 	switch event.EventName() {
 	case basketspb.BasketCheckedOutEvent:
 		return h.onBasketCheckedOut(ctx, event)
+	case depotpb.ShoppingListCompletedEvent:
+		return h.onShoppingListCompleted(ctx, event)
 	}
 
 	return nil
@@ -68,4 +75,10 @@ func (h integrationHandlers[T]) onBasketCheckedOut(ctx context.Context, event dd
 		PaymentID:  payload.GetPaymentId(),
 		Items:      items,
 	})
+}
+
+func (h integrationHandlers[T]) onShoppingListCompleted(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*depotpb.ShoppingListCompleted)
+
+	return h.app.ReadyOrder(ctx, commands.ReadyOrder{ID: payload.GetOrderId()})
 }

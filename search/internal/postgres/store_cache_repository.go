@@ -9,19 +9,20 @@ import (
 	"github.com/jackc/pgerrcode"
 	"github.com/stackus/errors"
 
+	"github.com/cuongpiger/mallbots/internal/postgres"
 	"github.com/cuongpiger/mallbots/search/internal/application"
 	"github.com/cuongpiger/mallbots/search/internal/models"
 )
 
 type StoreCacheRepository struct {
 	tableName string
-	db        *sql.DB
+	db        postgres.DB
 	fallback  application.StoreRepository
 }
 
 var _ application.StoreCacheRepository = (*StoreCacheRepository)(nil)
 
-func NewStoreCacheRepository(tableName string, db *sql.DB, fallback application.StoreRepository) StoreCacheRepository {
+func NewStoreCacheRepository(tableName string, db postgres.DB, fallback application.StoreRepository) StoreCacheRepository {
 	return StoreCacheRepository{
 		tableName: tableName,
 		db:        db,

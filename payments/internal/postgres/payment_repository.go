@@ -2,21 +2,21 @@ package postgres
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
 
+	"github.com/cuongpiger/mallbots/internal/postgres"
 	"github.com/cuongpiger/mallbots/payments/internal/application"
 	"github.com/cuongpiger/mallbots/payments/internal/models"
 )
 
 type PaymentRepository struct {
 	tableName string
-	db        *sql.DB
+	db        postgres.DB
 }
 
 var _ application.PaymentRepository = (*PaymentRepository)(nil)
 
-func NewPaymentRepository(tableName string, db *sql.DB) PaymentRepository {
+func NewPaymentRepository(tableName string, db postgres.DB) PaymentRepository {
 	return PaymentRepository{
 		tableName: tableName,
 		db:        db,
