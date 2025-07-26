@@ -8,6 +8,7 @@ import (
 	"github.com/cuongpiger/mallbots/baskets/internal/grpc"
 	"github.com/cuongpiger/mallbots/baskets/internal/handlers"
 	"github.com/cuongpiger/mallbots/baskets/internal/logging"
+	"github.com/cuongpiger/mallbots/baskets/internal/postgres"
 	"github.com/cuongpiger/mallbots/baskets/internal/rest"
 	"github.com/cuongpiger/mallbots/internal/am"
 	"github.com/cuongpiger/mallbots/internal/ddd"
@@ -43,8 +44,8 @@ func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) (err error
 	if err != nil {
 		return err
 	}
-	stores := grpc.NewStoreRepository(conn)
-	products := grpc.NewProductRepository(conn)
+	stores := postgres.NewStoreCacheRepository("baskets.stores_cache", mono.DB(), grpc.NewStoreRepository(conn))
+	products := postgres.NewProductCacheRepository("baskets.products_cache", mono.DB(), grpc.NewProductRepository(conn))
 	orders := grpc.NewOrderRepository(conn)
 
 	// setup application
@@ -57,11 +58,11 @@ func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) (err error
 		"Order", mono.Logger(),
 	)
 	storeHandlers := logging.LogEventHandlerAccess[ddd.Event](
-		application.NewStoreHandlers(mono.Logger()),
+		application.NewStoreHandlers(stores),
 		"Store", mono.Logger(),
 	)
 	productHandlers := logging.LogEventHandlerAccess[ddd.Event](
-		application.NewProductHandlers(mono.Logger()),
+		application.NewProductHandlers(products),
 		"Product", mono.Logger(),
 	)
 
@@ -86,13 +87,6 @@ func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) (err error
 	return
 }
 
-/**
- * This function registers all serializable types with the JSON serialization/deserialization system so that:
- * - Domain Events can be stored in the event store
- * - Aggregates can be reconstructed from stored events
- * - Snapshots can be saved and loaded for performance optimization
- * - Messages can be sent between bounded contexts
- */
 func registrations(reg registry.Registry) error {
 	serde := serdes.NewJsonSerde(reg)
 

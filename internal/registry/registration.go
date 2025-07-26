@@ -26,7 +26,7 @@ func RegisterKey(reg Registry, key string, v interface{}, s Serializer, d Deseri
 	t := reflect.TypeOf(v)
 
 	if t.Kind() == reflect.Ptr {
-		t = t.Elem() // Get the underlying type
+		t = t.Elem()
 	}
 
 	return reg.register(key, func() interface{} {

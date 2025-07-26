@@ -13,19 +13,20 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	baskets "github.com/cuongpiger/mallbots/baskets"
-	customers "github.com/cuongpiger/mallbots/customers"
-	depot "github.com/cuongpiger/mallbots/depot"
+	"github.com/cuongpiger/mallbots/baskets"
+	"github.com/cuongpiger/mallbots/customers"
+	"github.com/cuongpiger/mallbots/depot"
 	"github.com/cuongpiger/mallbots/internal/config"
 	"github.com/cuongpiger/mallbots/internal/logger"
 	"github.com/cuongpiger/mallbots/internal/monolith"
 	"github.com/cuongpiger/mallbots/internal/rpc"
 	"github.com/cuongpiger/mallbots/internal/waiter"
 	"github.com/cuongpiger/mallbots/internal/web"
-	notifications "github.com/cuongpiger/mallbots/notifications"
-	ordering "github.com/cuongpiger/mallbots/ordering"
-	payments "github.com/cuongpiger/mallbots/payments"
-	stores "github.com/cuongpiger/mallbots/stores"
+	"github.com/cuongpiger/mallbots/notifications"
+	"github.com/cuongpiger/mallbots/ordering"
+	"github.com/cuongpiger/mallbots/payments"
+	"github.com/cuongpiger/mallbots/search"
+	"github.com/cuongpiger/mallbots/stores"
 )
 
 func main() {
@@ -81,6 +82,7 @@ func run() (err error) {
 		&ordering.Module{},
 		&payments.Module{},
 		&stores.Module{},
+		&search.Module{},
 	}
 
 	if err = m.startupModules(); err != nil {

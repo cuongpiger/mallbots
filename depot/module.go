@@ -9,22 +9,31 @@ import (
 	"github.com/cuongpiger/mallbots/depot/internal/logging"
 	"github.com/cuongpiger/mallbots/depot/internal/postgres"
 	"github.com/cuongpiger/mallbots/depot/internal/rest"
+	"github.com/cuongpiger/mallbots/internal/am"
 	"github.com/cuongpiger/mallbots/internal/ddd"
+	"github.com/cuongpiger/mallbots/internal/jetstream"
 	"github.com/cuongpiger/mallbots/internal/monolith"
+	"github.com/cuongpiger/mallbots/internal/registry"
+	"github.com/cuongpiger/mallbots/stores/storespb"
 )
 
 type Module struct{}
 
-func (Module) Startup(ctx context.Context, mono monolith.Monolith) error {
+func (Module) Startup(ctx context.Context, mono monolith.Monolith) (err error) {
 	// setup Driven adapters
+	reg := registry.New()
+	if err = storespb.Registrations(reg); err != nil {
+		return err
+	}
+	eventStream := am.NewEventStream(reg, jetstream.NewStream(mono.Config().Nats.Stream, mono.JS()))
 	domainDispatcher := ddd.NewEventDispatcher[ddd.AggregateEvent]()
 	shoppingLists := postgres.NewShoppingListRepository("depot.shopping_lists", mono.DB())
 	conn, err := grpc.Dial(ctx, mono.Config().Rpc.Address())
 	if err != nil {
 		return err
 	}
-	stores := grpc.NewStoreRepository(conn)
-	products := grpc.NewProductRepository(conn)
+	stores := postgres.NewStoreCacheRepository("depot.stores_cache", mono.DB(), grpc.NewStoreRepository(conn))
+	products := postgres.NewProductCacheRepository("depot.products_cache", mono.DB(), grpc.NewProductRepository(conn))
 	orders := grpc.NewOrderRepository(conn)
 
 	// setup application
@@ -35,6 +44,14 @@ func (Module) Startup(ctx context.Context, mono monolith.Monolith) error {
 	orderHandlers := logging.LogEventHandlerAccess[ddd.AggregateEvent](
 		application.NewOrderHandlers(orders),
 		"Order", mono.Logger(),
+	)
+	storeHandlers := logging.LogEventHandlerAccess[ddd.Event](
+		application.NewStoreHandlers(stores),
+		"Store", mono.Logger(),
+	)
+	productHandlers := logging.LogEventHandlerAccess[ddd.Event](
+		application.NewProductHandlers(products),
+		"Product", mono.Logger(),
 	)
 
 	// setup Driver adapters
@@ -48,6 +65,12 @@ func (Module) Startup(ctx context.Context, mono monolith.Monolith) error {
 		return err
 	}
 	handlers.RegisterOrderHandlers(orderHandlers, domainDispatcher)
+	if err = handlers.RegisterStoreHandlers(storeHandlers, eventStream); err != nil {
+		return err
+	}
+	if err = handlers.RegisterProductHandlers(productHandlers, eventStream); err != nil {
+		return err
+	}
 
 	return nil
 }
