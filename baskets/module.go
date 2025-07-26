@@ -86,6 +86,13 @@ func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) (err error
 	return
 }
 
+/**
+ * This function registers all serializable types with the JSON serialization/deserialization system so that:
+ * - Domain Events can be stored in the event store
+ * - Aggregates can be reconstructed from stored events
+ * - Snapshots can be saved and loaded for performance optimization
+ * - Messages can be sent between bounded contexts
+ */
 func registrations(reg registry.Registry) error {
 	serde := serdes.NewJsonSerde(reg)
 
