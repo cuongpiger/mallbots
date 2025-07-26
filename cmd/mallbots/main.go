@@ -14,6 +14,7 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	"github.com/cuongpiger/mallbots/baskets"
+	"github.com/cuongpiger/mallbots/cosec"
 	"github.com/cuongpiger/mallbots/customers"
 	"github.com/cuongpiger/mallbots/depot"
 	"github.com/cuongpiger/mallbots/internal/config"
@@ -82,6 +83,7 @@ func run() (err error) {
 		&ordering.Module{},
 		&payments.Module{},
 		&stores.Module{},
+		&cosec.Module{},
 		&search.Module{},
 	}
 
