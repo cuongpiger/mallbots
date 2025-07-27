@@ -16,11 +16,11 @@ import (
 	"github.com/cuongpiger/mallbots/internal/ddd"
 	"github.com/cuongpiger/mallbots/internal/di"
 	"github.com/cuongpiger/mallbots/internal/jetstream"
-	"github.com/cuongpiger/mallbots/internal/monolith"
 	pg "github.com/cuongpiger/mallbots/internal/postgres"
 	"github.com/cuongpiger/mallbots/internal/registry"
 	"github.com/cuongpiger/mallbots/internal/registry/serdes"
 	"github.com/cuongpiger/mallbots/internal/sec"
+	"github.com/cuongpiger/mallbots/internal/system"
 	"github.com/cuongpiger/mallbots/internal/tm"
 	"github.com/cuongpiger/mallbots/ordering/orderingpb"
 	"github.com/cuongpiger/mallbots/payments/paymentspb"
@@ -28,7 +28,11 @@ import (
 
 type Module struct{}
 
-func (Module) Startup(ctx context.Context, mono monolith.Monolith) (err error) {
+func (Module) Startup(ctx context.Context, mono system.Service) (err error) {
+	return Root(ctx, mono)
+}
+
+func Root(ctx context.Context, svc system.Service) (err error) {
 	container := di.New()
 	// setup Driven adapters
 	container.AddSingleton("registry", func(c di.Container) (any, error) {
@@ -51,13 +55,13 @@ func (Module) Startup(ctx context.Context, mono monolith.Monolith) (err error) {
 		return reg, nil
 	})
 	container.AddSingleton("logger", func(c di.Container) (any, error) {
-		return mono.Logger(), nil
+		return svc.Logger(), nil
 	})
 	container.AddSingleton("stream", func(c di.Container) (any, error) {
-		return jetstream.NewStream(mono.Config().Nats.Stream, mono.JS(), c.Get("logger").(zerolog.Logger)), nil
+		return jetstream.NewStream(svc.Config().Nats.Stream, svc.JS(), c.Get("logger").(zerolog.Logger)), nil
 	})
 	container.AddSingleton("db", func(c di.Container) (any, error) {
-		return mono.DB(), nil
+		return svc.DB(), nil
 	})
 	container.AddSingleton("outboxProcessor", func(c di.Container) (any, error) {
 		return tm.NewOutboxProcessor(
@@ -114,7 +118,7 @@ func (Module) Startup(ctx context.Context, mono monolith.Monolith) (err error) {
 				c.Get("sagaRepo").(sec.SagaRepository[*models.CreateOrderData]),
 				c.Get("commandStream").(am.CommandStream),
 			),
-			"CreateOrderSaga", mono.Logger(),
+			"CreateOrderSaga", svc.Logger(),
 		), nil
 	})
 	container.AddScoped("integrationEventHandlers", func(c di.Container) (any, error) {

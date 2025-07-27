@@ -11,10 +11,10 @@ import (
 	"github.com/cuongpiger/mallbots/internal/di"
 	"github.com/cuongpiger/mallbots/internal/es"
 	"github.com/cuongpiger/mallbots/internal/jetstream"
-	"github.com/cuongpiger/mallbots/internal/monolith"
 	pg "github.com/cuongpiger/mallbots/internal/postgres"
 	"github.com/cuongpiger/mallbots/internal/registry"
 	"github.com/cuongpiger/mallbots/internal/registry/serdes"
+	"github.com/cuongpiger/mallbots/internal/system"
 	"github.com/cuongpiger/mallbots/internal/tm"
 	"github.com/cuongpiger/mallbots/stores/internal/application"
 	"github.com/cuongpiger/mallbots/stores/internal/domain"
@@ -29,7 +29,11 @@ import (
 type Module struct {
 }
 
-func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) (err error) {
+func (m *Module) Startup(ctx context.Context, mono system.Service) (err error) {
+	return Root(ctx, mono)
+}
+
+func Root(ctx context.Context, svc system.Service) (err error) {
 	container := di.New()
 	// setup Driven adapters
 	container.AddSingleton("registry", func(c di.Container) (any, error) {
@@ -43,16 +47,16 @@ func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) (err error
 		return reg, nil
 	})
 	container.AddSingleton("logger", func(c di.Container) (any, error) {
-		return mono.Logger(), nil
+		return svc.Logger(), nil
 	})
 	container.AddSingleton("stream", func(c di.Container) (any, error) {
-		return jetstream.NewStream(mono.Config().Nats.Stream, mono.JS(), c.Get("logger").(zerolog.Logger)), nil
+		return jetstream.NewStream(svc.Config().Nats.Stream, svc.JS(), c.Get("logger").(zerolog.Logger)), nil
 	})
 	container.AddSingleton("domainDispatcher", func(c di.Container) (any, error) {
 		return ddd.NewEventDispatcher[ddd.Event](), nil
 	})
 	container.AddSingleton("db", func(c di.Container) (any, error) {
-		return mono.DB(), nil
+		return svc.DB(), nil
 	})
 	container.AddSingleton("outboxProcessor", func(c di.Container) (any, error) {
 		return tm.NewOutboxProcessor(
@@ -137,19 +141,19 @@ func (m *Module) Startup(ctx context.Context, mono monolith.Monolith) (err error
 	})
 
 	// setup Driver adapters
-	if err = grpc.RegisterServerTx(container, mono.RPC()); err != nil {
+	if err = grpc.RegisterServerTx(container, svc.RPC()); err != nil {
 		return err
 	}
-	if err = rest.RegisterGateway(ctx, mono.Mux(), mono.Config().Rpc.Address()); err != nil {
+	if err = rest.RegisterGateway(ctx, svc.Mux(), svc.Config().Rpc.Address()); err != nil {
 		return err
 	}
-	if err = rest.RegisterSwagger(mono.Mux()); err != nil {
+	if err = rest.RegisterSwagger(svc.Mux()); err != nil {
 		return err
 	}
 	handlers.RegisterCatalogHandlersTx(container)
 	handlers.RegisterMallHandlersTx(container)
 	handlers.RegisterDomainEventHandlersTx(container)
-	if err = storespb.RegisterAsyncAPI(mono.Mux()); err != nil {
+	if err = storespb.RegisterAsyncAPI(svc.Mux()); err != nil {
 		return err
 	}
 	startOutboxProcessor(ctx, container)
