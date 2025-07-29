@@ -1,0 +1,26 @@
+package monolith
+
+import (
+	"context"
+	"database/sql"
+
+	chi "github.com/go-chi/chi/v5"
+	"github.com/rs/zerolog"
+	"google.golang.org/grpc"
+
+	"github.com/cuongpiger/mallbots/internal/config"
+	"github.com/cuongpiger/mallbots/internal/waiter"
+)
+
+type Monolith interface {
+	Config() config.AppConfig
+	DB() *sql.DB
+	Logger() zerolog.Logger
+	Mux() *chi.Mux
+	RPC() *grpc.Server
+	Waiter() waiter.Waiter
+}
+
+type Module interface {
+	StartUp(context.Context, Monolith) error
+}
