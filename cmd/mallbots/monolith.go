@@ -54,7 +54,7 @@ func (a *app) Waiter() waiter.Waiter {
 
 func (a *app) startupModules() error {
 	for _, module := range a.modules {
-		if err := module.StartUp(a.Waiter().Context(), a); err != nil {
+		if err := module.Startup(a.Waiter().Context(), a); err != nil {
 			return err
 		}
 	}

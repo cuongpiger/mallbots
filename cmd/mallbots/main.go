@@ -11,6 +11,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
+	"github.com/cuongpiger/mallbots/customers"
 	"github.com/cuongpiger/mallbots/internal/config"
 	"github.com/cuongpiger/mallbots/internal/logger"
 	"github.com/cuongpiger/mallbots/internal/monolith"
@@ -32,6 +33,8 @@ func run() error {
 	if err != nil {
 		return err
 	}
+
+	fmt.Println("COnfig loaded:", cfg.PG)
 
 	m := &app{
 		cfg: cfg,
@@ -56,7 +59,9 @@ func run() error {
 	m.waiter = waiter.New(waiter.CatchSignals())
 
 	// init modules
-	m.modules = []monolith.Module{}
+	m.modules = []monolith.Module{
+		new(customers.Module),
+	}
 
 	if err = m.startupModules(); err != nil {
 		return err
