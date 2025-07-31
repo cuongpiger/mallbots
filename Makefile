@@ -10,4 +10,9 @@ teardown:
 run:
 	export $$(cat ./docker/.env-dev | xargs) && go run ./cmd/mallbots/
 
-.PHONY: tidy setup teardown
+generate:
+	@echo running code generation
+	@go generate ./...
+	@echo done
+
+.PHONY: tidy setup teardown run generate
