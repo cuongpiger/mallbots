@@ -81,6 +81,45 @@
         ]
       }
     },
+    "/api/customers/{id}/authorize": {
+      "post": {
+        "summary": "Authorize a customer",
+        "operationId": "authorizeCustomer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/customerspbAuthorizeCustomerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomersServiceAuthorizeCustomerBody"
+            }
+          }
+        ],
+        "tags": [
+          "Customer"
+        ]
+      }
+    },
     "/api/customers/{id}/disable": {
       "put": {
         "summary": "Disable a customer",
@@ -161,6 +200,9 @@
     }
   },
   "definitions": {
+    "CustomersServiceAuthorizeCustomerBody": {
+      "type": "object"
+    },
     "CustomersServiceDisableCustomerBody": {
       "type": "object"
     },
