@@ -12,4 +12,5 @@
 <hr>
 
 - Swagger UI: [http://localhost:8080/](http://localhost:8080/)
+- HTTP service: [http://localhost:8080/](http://localhost:8080/)
 - gRPC service: [grpc://127.0.0.1:8085](grpc://127.0.0.1:8085)
