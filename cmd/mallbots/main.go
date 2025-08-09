@@ -18,6 +18,7 @@ import (
 	"github.com/cuongpiger/mallbots/internal/rpc"
 	"github.com/cuongpiger/mallbots/internal/waiter"
 	"github.com/cuongpiger/mallbots/internal/web"
+	"github.com/cuongpiger/mallbots/notifications"
 )
 
 func main() {
@@ -61,6 +62,7 @@ func run() error {
 	// init modules
 	m.modules = []monolith.Module{
 		new(customers.Module),
+		new(notifications.Module),
 	}
 
 	if err = m.startupModules(); err != nil {
