@@ -19,6 +19,7 @@ import (
 	"github.com/cuongpiger/mallbots/internal/waiter"
 	"github.com/cuongpiger/mallbots/internal/web"
 	"github.com/cuongpiger/mallbots/notifications"
+	"github.com/cuongpiger/mallbots/payments"
 )
 
 func main() {
@@ -63,6 +64,7 @@ func run() error {
 	m.modules = []monolith.Module{
 		new(customers.Module),
 		new(notifications.Module),
+		new(payments.Module),
 	}
 
 	if err = m.startupModules(); err != nil {
