@@ -36,7 +36,7 @@ func run() error {
 		return err
 	}
 
-	fmt.Println("COnfig loaded:", cfg.PG)
+	fmt.Println("Config loaded:", cfg.PG)
 
 	m := &app{
 		cfg: cfg,
