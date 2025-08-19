@@ -20,6 +20,10 @@
 ```mermaid
 ---
 title: Mallbots System Design
+
+config:
+  flowchart:
+    htmlLabels: false
 ---
 flowchart LR
   customers[Customers Service]
@@ -27,6 +31,16 @@ flowchart LR
   payments[Payments Service]
   ordering[Ordering Service]
   database[(Database)]
+
+  customers_doc["`
+  RegisterCustomer
+  AuthorizeCustomer
+  GetCustomer
+  EnableCustomer
+  DisableCustomer
+    `"]@{ shape: doc }
+
+  customers_doc -...- customers
 
   notifications -->|gRPC| customers
   customers --> database
