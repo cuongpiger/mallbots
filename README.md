@@ -46,8 +46,27 @@ flowchart LR
   NotifyOrderReady
   "]@{ shape: doc }
 
+  payments_doc["
+  AuthorizePayment
+  ConfirmPayment
+  CreateInvoice
+  AdjustInvoice
+  PayInvoice
+  CancelInvoice
+  "]@{ shape: doc }
+
+  ordering_doc["
+  CreateOrder
+  GetOrder
+  CancelOrder
+  ReadyOrder
+  CompleteOrder
+  "]@{ shape: doc }
+
   customers_doc -...- customers
   notifications_doc -...- notifications
+  payments_doc -...- payments
+  ordering_doc -...- ordering
 
   notifications -->|gRPC| customers
   customers --> database
