@@ -25,11 +25,14 @@ config:
   flowchart:
     htmlLabels: false
 ---
-flowchart LR
+flowchart RL
   customers[Customers Service]
   notifications[Notifications Service]
   payments[Payments Service]
   ordering[Ordering Service]
+  depot[Depot Service]
+  stores[Stores Service]
+  baskets[Baskets Service]
   database[(Database)]
 
   customers_doc["
@@ -63,17 +66,57 @@ flowchart LR
   CompleteOrder
   "]@{ shape: doc }
 
+  depot_doc["
+  CreateShoppingList
+  CancelShoppingList
+  AssignShoppingList
+  CompleteShoppingList
+  "]@{ shape: doc }
+
+  stores_doc["
+  CreateStore
+  GetStore
+  GetStores
+  EnableParticipation
+  DisableParticipation
+  GetParticipatingStores
+  AddProduct
+  RemoveProduct
+  GetCatalog
+  GetProduct
+  "]@{ shape: doc }
+
+  baskets_doc["
+  StartBasket
+  CancelBasket
+  CheckoutBasket
+  AddItem
+  RemoveItem
+  GetBasket
+  "]@{ shape: doc }
+
   customers_doc -...- customers
   notifications_doc -...- notifications
   payments_doc -...- payments
   ordering_doc -...- ordering
+  depot_doc -...- depot
+  stores_doc -...- stores
+  baskets_doc -...- baskets
 
   notifications -->|gRPC| customers
   customers --> database
   ordering -->|gRPC| notifications
   ordering -->|gRPC| customers
   ordering -->|gRPC| payments
+  ordering -->|gRPC| depot
   ordering --> database
   payments -->|gRPC| ordering
   payments --> database
+  depot -->|gRPC| ordering
+  depot -->|gRPC| stores
+  depot --> database
+  stores --> database
+  baskets -->|gRPC| ordering
+  baskets -->|gRPC| stores
+  baskets --> database
 ```

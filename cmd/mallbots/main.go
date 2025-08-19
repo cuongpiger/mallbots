@@ -11,7 +11,9 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
+	"github.com/cuongpiger/mallbots/baskets"
 	"github.com/cuongpiger/mallbots/customers"
+	"github.com/cuongpiger/mallbots/depot"
 	"github.com/cuongpiger/mallbots/internal/config"
 	"github.com/cuongpiger/mallbots/internal/logger"
 	"github.com/cuongpiger/mallbots/internal/monolith"
@@ -19,7 +21,9 @@ import (
 	"github.com/cuongpiger/mallbots/internal/waiter"
 	"github.com/cuongpiger/mallbots/internal/web"
 	"github.com/cuongpiger/mallbots/notifications"
+	"github.com/cuongpiger/mallbots/ordering"
 	"github.com/cuongpiger/mallbots/payments"
+	"github.com/cuongpiger/mallbots/stores"
 )
 
 func main() {
@@ -65,6 +69,10 @@ func run() error {
 		new(customers.Module),
 		new(notifications.Module),
 		new(payments.Module),
+		new(ordering.Module),
+		new(depot.Module),
+		new(stores.Module),
+		new(baskets.Module),
 	}
 
 	if err = m.startupModules(); err != nil {
