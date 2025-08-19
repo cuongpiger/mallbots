@@ -14,3 +14,26 @@
 - Swagger UI: [http://localhost:8080/](http://localhost:8080/)
 - HTTP service: [http://localhost:8080/](http://localhost:8080/)
 - gRPC service: [grpc://127.0.0.1:8085](grpc://127.0.0.1:8085)
+
+# System Design
+
+```mermaid
+---
+title: Mallbots System Design
+---
+flowchart LR
+  customers[Customers Service]
+  notifications[Notifications Service]
+  payments[Payments Service]
+  ordering[Ordering Service]
+  database[(Database)]
+
+  notifications -->|gRPC| customers
+  customers --> database
+  ordering -->|gRPC| notifications
+  ordering -->|gRPC| customers
+  ordering -->|gRPC| payments
+  ordering --> database
+  payments -->|gRPC| ordering
+  payments --> database
+```
