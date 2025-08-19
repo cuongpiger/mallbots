@@ -32,15 +32,22 @@ flowchart LR
   ordering[Ordering Service]
   database[(Database)]
 
-  customers_doc["`
+  customers_doc["
   RegisterCustomer
   AuthorizeCustomer
   GetCustomer
   EnableCustomer
   DisableCustomer
-    `"]@{ shape: doc }
+  "]@{ shape: doc }
+
+  notifications_doc["
+  NotifyOrderCreated
+  NotifyOrderCanceled
+  NotifyOrderReady
+  "]@{ shape: doc }
 
   customers_doc -...- customers
+  notifications_doc -...- notifications
 
   notifications -->|gRPC| customers
   customers --> database
