@@ -50,8 +50,111 @@
         ]
       }
     },
-    "/api/payments/invoices/{id}/pay": {
+    "/api/payments/invoices": {
+      "post": {
+        "summary": "Create a new invoice",
+        "operationId": "createInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentspbCreateInvoiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/paymentspbCreateInvoiceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/payments/invoices/{id}/adjust": {
       "put": {
+        "summary": "Adjust an invoice",
+        "operationId": "adjustInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentspbAdjustInvoiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PaymentsServiceAdjustInvoiceBody"
+            }
+          }
+        ],
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/payments/invoices/{id}/cancel": {
+      "get": {
+        "summary": "Cancel an invoice",
+        "operationId": "cancelInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentspbCancelInvoiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/payments/invoices/{id}/pay": {
+      "get": {
         "summary": "Pay an invoice",
         "operationId": "payInvoice",
         "responses": {
@@ -74,25 +177,54 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PaymentsServicePayInvoiceBody"
-            }
           }
         ],
         "tags": [
           "Invoice"
         ]
       }
+    },
+    "/api/payments/{id}/confirm": {
+      "get": {
+        "summary": "Confirm a payment",
+        "operationId": "confirmPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentspbConfirmPaymentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Payment"
+        ]
+      }
     }
   },
   "definitions": {
-    "PaymentsServicePayInvoiceBody": {
-      "type": "object"
+    "PaymentsServiceAdjustInvoiceBody": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
     },
     "paymentspbAdjustInvoiceResponse": {
       "type": "object"
@@ -122,6 +254,21 @@
     },
     "paymentspbConfirmPaymentResponse": {
       "type": "object"
+    },
+    "paymentspbCreateInvoiceRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "paymentId": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
     },
     "paymentspbCreateInvoiceResponse": {
       "type": "object",

@@ -13,9 +13,33 @@ openapiOptions:
         tags:
           - Payment
         summary: Authorize a future payment
+    - method: paymentspb.PaymentsService.ConfirmPayment
+      option:
+        operationId: confirmPayment
+        tags:
+          - Payment
+        summary: Confirm a payment
+    - method: paymentspb.PaymentsService.CreateInvoice
+      option:
+        operationId: createInvoice
+        tags:
+          - Invoice
+        summary: Create a new invoice
+    - method: paymentspb.PaymentsService.AdjustInvoice
+      option:
+        operationId: adjustInvoice
+        tags:
+          - Invoice
+        summary: Adjust an invoice
     - method: paymentspb.PaymentsService.PayInvoice
       option:
         operationId: payInvoice
         tags:
           - Invoice
         summary: Pay an invoice
+    - method: paymentspb.PaymentsService.CancelInvoice
+      option:
+        operationId: cancelInvoice
+        tags:
+          - Invoice
+        summary: Cancel an invoice
