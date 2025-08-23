@@ -203,8 +203,8 @@ const file_orderingpb_messages_proto_rawDesc = "" +
 	"store_name\x18\x03 \x01(\tR\tstoreName\x12!\n" +
 	"\fproduct_name\x18\x04 \x01(\tR\vproductName\x12\x14\n" +
 	"\x05price\x18\x05 \x01(\x01R\x05price\x12\x1a\n" +
-	"\bquantity\x18\x06 \x01(\x05R\bquantityB\x95\x01\n" +
-	"\x0ecom.orderingpbB\rMessagesProtoP\x01Z,eda-in-golang/ordering/orderingpb/orderingpb\xa2\x02\x03OXX\xaa\x02\n" +
+	"\bquantity\x18\x06 \x01(\x05R\bquantityB\xa6\x01\n" +
+	"\x0ecom.orderingpbB\rMessagesProtoP\x01Z=github.com/cuongpiger/mallbots/ordering/orderingpb/orderingpb\xa2\x02\x03OXX\xaa\x02\n" +
 	"Orderingpb\xca\x02\n" +
 	"Orderingpb\xe2\x02\x16Orderingpb\\GPBMetadata\xea\x02\n" +
 	"Orderingpbb\x06proto3"

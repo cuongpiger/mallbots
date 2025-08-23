@@ -389,8 +389,8 @@ const file_depotpb_api_proto_rawDesc = "" +
 	"\x12CreateShoppingList\x12\".depotpb.CreateShoppingListRequest\x1a#.depotpb.CreateShoppingListResponse\"\x00\x12_\n" +
 	"\x12CancelShoppingList\x12\".depotpb.CancelShoppingListRequest\x1a#.depotpb.CancelShoppingListResponse\"\x00\x12_\n" +
 	"\x12AssignShoppingList\x12\".depotpb.AssignShoppingListRequest\x1a#.depotpb.AssignShoppingListResponse\"\x00\x12e\n" +
-	"\x14CompleteShoppingList\x12$.depotpb.CompleteShoppingListRequest\x1a%.depotpb.CompleteShoppingListResponse\"\x00Bx\n" +
-	"\vcom.depotpbB\bApiProtoP\x01Z#eda-in-golang/depot/depotpb/depotpb\xa2\x02\x03DXX\xaa\x02\aDepotpb\xca\x02\aDepotpb\xe2\x02\x13Depotpb\\GPBMetadata\xea\x02\aDepotpbb\x06proto3"
+	"\x14CompleteShoppingList\x12$.depotpb.CompleteShoppingListRequest\x1a%.depotpb.CompleteShoppingListResponse\"\x00B\x89\x01\n" +
+	"\vcom.depotpbB\bApiProtoP\x01Z4github.com/cuongpiger/mallbots/depot/depotpb/depotpb\xa2\x02\x03DXX\xaa\x02\aDepotpb\xca\x02\aDepotpb\xe2\x02\x13Depotpb\\GPBMetadata\xea\x02\aDepotpbb\x06proto3"
 
 var (
 	file_depotpb_api_proto_rawDescOnce sync.Once

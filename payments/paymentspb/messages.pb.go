@@ -25,8 +25,8 @@ var File_paymentspb_messages_proto protoreflect.FileDescriptor
 const file_paymentspb_messages_proto_rawDesc = "" +
 	"\n" +
 	"\x19paymentspb/messages.proto\x12\n" +
-	"paymentspbB\x95\x01\n" +
-	"\x0ecom.paymentspbB\rMessagesProtoP\x01Z,eda-in-golang/payments/paymentspb/paymentspb\xa2\x02\x03PXX\xaa\x02\n" +
+	"paymentspbB\xa6\x01\n" +
+	"\x0ecom.paymentspbB\rMessagesProtoP\x01Z=github.com/cuongpiger/mallbots/payments/paymentspb/paymentspb\xa2\x02\x03PXX\xaa\x02\n" +
 	"Paymentspb\xca\x02\n" +
 	"Paymentspb\xe2\x02\x16Paymentspb\\GPBMetadata\xea\x02\n" +
 	"Paymentspbb\x06proto3"

@@ -300,8 +300,8 @@ const file_depotpb_messages_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2\r.depotpb.ItemR\x05value:\x028\x01\"6\n" +
 	"\x04Item\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
-	"\bquantity\x18\x02 \x01(\x05R\bquantityB}\n" +
-	"\vcom.depotpbB\rMessagesProtoP\x01Z#eda-in-golang/depot/depotpb/depotpb\xa2\x02\x03DXX\xaa\x02\aDepotpb\xca\x02\aDepotpb\xe2\x02\x13Depotpb\\GPBMetadata\xea\x02\aDepotpbb\x06proto3"
+	"\bquantity\x18\x02 \x01(\x05R\bquantityB\x8e\x01\n" +
+	"\vcom.depotpbB\rMessagesProtoP\x01Z4github.com/cuongpiger/mallbots/depot/depotpb/depotpb\xa2\x02\x03DXX\xaa\x02\aDepotpb\xca\x02\aDepotpb\xe2\x02\x13Depotpb\\GPBMetadata\xea\x02\aDepotpbb\x06proto3"
 
 var (
 	file_depotpb_messages_proto_rawDescOnce sync.Once

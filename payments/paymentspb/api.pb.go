@@ -588,8 +588,8 @@ const file_paymentspb_api_proto_rawDesc = "" +
 	"\rAdjustInvoice\x12 .paymentspb.AdjustInvoiceRequest\x1a!.paymentspb.AdjustInvoiceResponse\"\x00\x12M\n" +
 	"\n" +
 	"PayInvoice\x12\x1d.paymentspb.PayInvoiceRequest\x1a\x1e.paymentspb.PayInvoiceResponse\"\x00\x12V\n" +
-	"\rCancelInvoice\x12 .paymentspb.CancelInvoiceRequest\x1a!.paymentspb.CancelInvoiceResponse\"\x00B\x90\x01\n" +
-	"\x0ecom.paymentspbB\bApiProtoP\x01Z,eda-in-golang/payments/paymentspb/paymentspb\xa2\x02\x03PXX\xaa\x02\n" +
+	"\rCancelInvoice\x12 .paymentspb.CancelInvoiceRequest\x1a!.paymentspb.CancelInvoiceResponse\"\x00B\xa1\x01\n" +
+	"\x0ecom.paymentspbB\bApiProtoP\x01Z=github.com/cuongpiger/mallbots/payments/paymentspb/paymentspb\xa2\x02\x03PXX\xaa\x02\n" +
 	"Paymentspb\xca\x02\n" +
 	"Paymentspb\xe2\x02\x16Paymentspb\\GPBMetadata\xea\x02\n" +
 	"Paymentspbb\x06proto3"

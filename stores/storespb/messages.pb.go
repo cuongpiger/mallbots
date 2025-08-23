@@ -189,8 +189,8 @@ const file_storespb_messages_proto_rawDesc = "" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x10\n" +
 	"\x03sku\x18\x05 \x01(\tR\x03sku\x12\x14\n" +
-	"\x05price\x18\x06 \x01(\x01R\x05priceB\x85\x01\n" +
-	"\fcom.storespbB\rMessagesProtoP\x01Z&eda-in-golang/stores/storespb/storespb\xa2\x02\x03SXX\xaa\x02\bStorespb\xca\x02\bStorespb\xe2\x02\x14Storespb\\GPBMetadata\xea\x02\bStorespbb\x06proto3"
+	"\x05price\x18\x06 \x01(\x01R\x05priceB\x96\x01\n" +
+	"\fcom.storespbB\rMessagesProtoP\x01Z7github.com/cuongpiger/mallbots/stores/storespb/storespb\xa2\x02\x03SXX\xaa\x02\bStorespb\xca\x02\bStorespb\xe2\x02\x14Storespb\\GPBMetadata\xea\x02\bStorespbb\x06proto3"
 
 var (
 	file_storespb_messages_proto_rawDescOnce sync.Once

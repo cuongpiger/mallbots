@@ -496,8 +496,8 @@ const file_orderingpb_api_proto_rawDesc = "" +
 	"\vCancelOrder\x12\x1e.orderingpb.CancelOrderRequest\x1a\x1f.orderingpb.CancelOrderResponse\"\x00\x12M\n" +
 	"\n" +
 	"ReadyOrder\x12\x1d.orderingpb.ReadyOrderRequest\x1a\x1e.orderingpb.ReadyOrderResponse\"\x00\x12V\n" +
-	"\rCompleteOrder\x12 .orderingpb.CompleteOrderRequest\x1a!.orderingpb.CompleteOrderResponse\"\x00B\x90\x01\n" +
-	"\x0ecom.orderingpbB\bApiProtoP\x01Z,eda-in-golang/ordering/orderingpb/orderingpb\xa2\x02\x03OXX\xaa\x02\n" +
+	"\rCompleteOrder\x12 .orderingpb.CompleteOrderRequest\x1a!.orderingpb.CompleteOrderResponse\"\x00B\xa1\x01\n" +
+	"\x0ecom.orderingpbB\bApiProtoP\x01Z=github.com/cuongpiger/mallbots/ordering/orderingpb/orderingpb\xa2\x02\x03OXX\xaa\x02\n" +
 	"Orderingpb\xca\x02\n" +
 	"Orderingpb\xe2\x02\x16Orderingpb\\GPBMetadata\xea\x02\n" +
 	"Orderingpbb\x06proto3"

@@ -308,8 +308,8 @@ const file_notificationspb_api_proto_rawDesc = "" +
 	"\x14NotificationsService\x12o\n" +
 	"\x12NotifyOrderCreated\x12*.notificationspb.NotifyOrderCreatedRequest\x1a+.notificationspb.NotifyOrderCreatedResponse\"\x00\x12r\n" +
 	"\x13NotifyOrderCanceled\x12+.notificationspb.NotifyOrderCanceledRequest\x1a,.notificationspb.NotifyOrderCanceledResponse\"\x00\x12i\n" +
-	"\x10NotifyOrderReady\x12(.notificationspb.NotifyOrderReadyRequest\x1a).notificationspb.NotifyOrderReadyResponse\"\x00B\xb8\x01\n" +
-	"\x13com.notificationspbB\bApiProtoP\x01Z;eda-in-golang/notifications/notificationspb/notificationspb\xa2\x02\x03NXX\xaa\x02\x0fNotificationspb\xca\x02\x0fNotificationspb\xe2\x02\x1bNotificationspb\\GPBMetadata\xea\x02\x0fNotificationspbb\x06proto3"
+	"\x10NotifyOrderReady\x12(.notificationspb.NotifyOrderReadyRequest\x1a).notificationspb.NotifyOrderReadyResponse\"\x00B\xc9\x01\n" +
+	"\x13com.notificationspbB\bApiProtoP\x01ZLgithub.com/cuongpiger/mallbots/notifications/notificationspb/notificationspb\xa2\x02\x03NXX\xaa\x02\x0fNotificationspb\xca\x02\x0fNotificationspb\xe2\x02\x1bNotificationspb\\GPBMetadata\xea\x02\x0fNotificationspbb\x06proto3"
 
 var (
 	file_notificationspb_api_proto_rawDescOnce sync.Once

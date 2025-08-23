@@ -959,8 +959,8 @@ const file_storespb_api_proto_rawDesc = "" +
 	"\n" +
 	"GetCatalog\x12\x1b.storespb.GetCatalogRequest\x1a\x1c.storespb.GetCatalogResponse\"\x00\x12I\n" +
 	"\n" +
-	"GetProduct\x12\x1b.storespb.GetProductRequest\x1a\x1c.storespb.GetProductResponse\"\x00B\x80\x01\n" +
-	"\fcom.storespbB\bApiProtoP\x01Z&eda-in-golang/stores/storespb/storespb\xa2\x02\x03SXX\xaa\x02\bStorespb\xca\x02\bStorespb\xe2\x02\x14Storespb\\GPBMetadata\xea\x02\bStorespbb\x06proto3"
+	"GetProduct\x12\x1b.storespb.GetProductRequest\x1a\x1c.storespb.GetProductResponse\"\x00B\x91\x01\n" +
+	"\fcom.storespbB\bApiProtoP\x01Z7github.com/cuongpiger/mallbots/stores/storespb/storespb\xa2\x02\x03SXX\xaa\x02\bStorespb\xca\x02\bStorespb\xe2\x02\x14Storespb\\GPBMetadata\xea\x02\bStorespbb\x06proto3"
 
 var (
 	file_storespb_api_proto_rawDescOnce sync.Once
