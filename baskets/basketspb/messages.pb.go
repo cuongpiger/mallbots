@@ -173,8 +173,8 @@ const file_basketspb_messages_proto_rawDesc = "" +
 	"store_name\x18\x03 \x01(\tR\tstoreName\x12!\n" +
 	"\fproduct_name\x18\x04 \x01(\tR\vproductName\x12#\n" +
 	"\rproduct_price\x18\x05 \x01(\x01R\fproductPrice\x12\x1a\n" +
-	"\bquantity\x18\x06 \x01(\x05R\bquantityB\x8d\x01\n" +
-	"\rcom.basketspbB\rMessagesProtoP\x01Z)eda-in-golang/baskets/basketspb/basketspb\xa2\x02\x03BXX\xaa\x02\tBasketspb\xca\x02\tBasketspb\xe2\x02\x15Basketspb\\GPBMetadata\xea\x02\tBasketspbb\x06proto3"
+	"\bquantity\x18\x06 \x01(\x05R\bquantityB\x9e\x01\n" +
+	"\rcom.basketspbB\rMessagesProtoP\x01Z:github.com/cuongpiger/mallbots/baskets/basketspb/basketspb\xa2\x02\x03BXX\xaa\x02\tBasketspb\xca\x02\tBasketspb\xe2\x02\x15Basketspb\\GPBMetadata\xea\x02\tBasketspbb\x06proto3"
 
 var (
 	file_basketspb_messages_proto_rawDescOnce sync.Once
