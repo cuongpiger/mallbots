@@ -2,6 +2,11 @@
 
 <hr>
 
+###### 🌈 Table of contents
+- [x] **Chapter 03**: Design & Planning
+  - [Upstream](https://github.com/cuongpiger/mallbots/tree/chap03)
+  - [Downstream](https://github.com/cuongpiger/mallbots/tree/new/chap03)
+
 ###### ⚔️ References
 
 # Postman Collections
