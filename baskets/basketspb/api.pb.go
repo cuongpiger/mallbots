@@ -598,8 +598,8 @@ const file_basketspb_api_proto_rawDesc = "" +
 	"\aAddItem\x12\x19.basketspb.AddItemRequest\x1a\x1a.basketspb.AddItemResponse\"\x00\x12K\n" +
 	"\n" +
 	"RemoveItem\x12\x1c.basketspb.RemoveItemRequest\x1a\x1d.basketspb.RemoveItemResponse\"\x00\x12H\n" +
-	"\tGetBasket\x12\x1b.basketspb.GetBasketRequest\x1a\x1c.basketspb.GetBasketResponse\"\x00B\x88\x01\n" +
-	"\rcom.basketspbB\bApiProtoP\x01Z)eda-in-golang/baskets/basketspb/basketspb\xa2\x02\x03BXX\xaa\x02\tBasketspb\xca\x02\tBasketspb\xe2\x02\x15Basketspb\\GPBMetadata\xea\x02\tBasketspbb\x06proto3"
+	"\tGetBasket\x12\x1b.basketspb.GetBasketRequest\x1a\x1c.basketspb.GetBasketResponse\"\x00B\x99\x01\n" +
+	"\rcom.basketspbB\bApiProtoP\x01Z:github.com/cuongpiger/mallbots/baskets/basketspb/basketspb\xa2\x02\x03BXX\xaa\x02\tBasketspb\xca\x02\tBasketspb\xe2\x02\x15Basketspb\\GPBMetadata\xea\x02\tBasketspbb\x06proto3"
 
 var (
 	file_basketspb_api_proto_rawDescOnce sync.Once
