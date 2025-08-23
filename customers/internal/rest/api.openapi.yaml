@@ -31,3 +31,9 @@ openapiOptions:
         tags:
           - Customer
         summary: Disable a customer
+    - method: customerspb.CustomersService.AuthorizeCustomer
+      option:
+        operationId: authorizeCustomer
+        tags:
+          - Customer
+        summary: Authorize a customer

@@ -18,4 +18,10 @@ up:
 down:
 	@docker compose down
 
-.PHONY: install-tools generate up down
+run:
+	set -a && source ./docker/.env-dev && set +a && go run ./cmd/mallbots/
+
+clean:
+	@docker volume rm mallbots_pgdata
+
+.PHONY: install-tools generate up down run clean

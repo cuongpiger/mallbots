@@ -13,3 +13,6 @@ http:
     - selector: customerspb.CustomersService.DisableCustomer
       put: /api/customers/{id}/disable
       body: "*"
+    - selector: customerspb.CustomersService.AuthorizeCustomer
+      post: /api/customers/{id}/authorize
+      body: "*"
