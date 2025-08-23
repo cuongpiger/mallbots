@@ -18,10 +18,22 @@ openapiOptions:
         operationId: getOrder
         tags:
           - Order
-        summary: Get na order
+        summary: Get an order by ID
     - method: orderingpb.OrderingService.CancelOrder
       option:
         operationId: cancelOrder
         tags:
           - Order
         summary: Cancel an order
+    - method: orderingpb.OrderingService.ReadyOrder
+      option:
+        operationId: readyOrder
+        tags:
+          - Order
+        summary: Mark an order as ready
+    - method: orderingpb.OrderingService.CompleteOrder
+      option:
+        operationId: completeOrder
+        tags:
+          - Order
+        summary: Complete an order

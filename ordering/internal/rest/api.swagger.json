@@ -52,7 +52,7 @@
     },
     "/api/ordering/{id}": {
       "get": {
-        "summary": "Get na order",
+        "summary": "Get an order by ID",
         "operationId": "getOrder",
         "responses": {
           "200": {
@@ -109,9 +109,87 @@
           "Order"
         ]
       }
+    },
+    "/api/ordering/{id}/complete": {
+      "post": {
+        "summary": "Complete an order",
+        "operationId": "completeOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbCompleteOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderingServiceCompleteOrderBody"
+            }
+          }
+        ],
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/ordering/{id}/ready": {
+      "get": {
+        "summary": "Mark an order as ready",
+        "operationId": "readyOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbReadyOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Order"
+        ]
+      }
     }
   },
   "definitions": {
+    "OrderingServiceCompleteOrderBody": {
+      "type": "object",
+      "properties": {
+        "invoiceId": {
+          "type": "string"
+        }
+      }
+    },
     "orderingpbCancelOrderResponse": {
       "type": "object"
     },

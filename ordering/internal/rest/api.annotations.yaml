@@ -9,3 +9,8 @@ http:
       get: /api/ordering/{id}
     - selector: orderingpb.OrderingService.CancelOrder
       delete: /api/ordering/{id}
+    - selector: orderingpb.OrderingService.ReadyOrder
+      get: /api/ordering/{id}/ready
+    - selector: orderingpb.OrderingService.CompleteOrder
+      post: /api/ordering/{id}/complete
+      body: "*"
