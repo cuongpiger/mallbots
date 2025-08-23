@@ -1,0 +1,13 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    - selector: notificationspb.NotificationsService.NotifyOrderCreated
+      post: /api/notifications/order-created
+      body: "*"
+    - selector: notificationspb.NotificationsService.NotifyOrderCanceled
+      post: /api/notifications/order-canceled
+      body: "*"
+    - selector: notificationspb.NotificationsService.NotifyOrderReady
+      post: /api/notifications/order-ready
+      body: "*"

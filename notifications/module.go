@@ -7,6 +7,7 @@ import (
 	"github.com/cuongpiger/mallbots/notifications/internal/application"
 	"github.com/cuongpiger/mallbots/notifications/internal/grpc"
 	"github.com/cuongpiger/mallbots/notifications/internal/logging"
+	"github.com/cuongpiger/mallbots/notifications/internal/rest"
 )
 
 type Module struct{}
@@ -26,6 +27,12 @@ func (m Module) Startup(ctx context.Context, mono monolith.Monolith) error {
 
 	// setup Driver adapters
 	if err := grpc.RegisterServer(ctx, app, mono.RPC()); err != nil {
+		return err
+	}
+	if err := rest.RegisterGateway(ctx, mono.Mux(), mono.Config().Rpc.Address()); err != nil {
+		return err
+	}
+	if err := rest.RegisterSwagger(mono.Mux()); err != nil {
 		return err
 	}
 

@@ -1,0 +1,27 @@
+openapiOptions:
+  file:
+    - file: "notificationspb/messages.proto"
+      option:
+        info:
+          title: Notifications Operations
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: notificationspb.NotificationsService.NotifyOrderCreated
+      option:
+        operationId: notifyOrderCreated
+        tags:
+          - Notifications
+        summary: Notify that an order has been created
+    - method: notificationspb.NotificationsService.NotifyOrderCanceled
+      option:
+        operationId: notifyOrderCanceled
+        tags:
+          - Notifications
+        summary: Notify that an order has been canceled
+    - method: notificationspb.NotificationsService.NotifyOrderReady
+      option:
+        operationId: notifyOrderReady
+        tags:
+          - Notifications
+        summary: Notify that an order is ready

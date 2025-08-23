@@ -24,8 +24,8 @@ var File_notificationspb_messages_proto protoreflect.FileDescriptor
 
 const file_notificationspb_messages_proto_rawDesc = "" +
 	"\n" +
-	"\x1enotificationspb/messages.proto\x12\x0fnotificationspbB\xbd\x01\n" +
-	"\x13com.notificationspbB\rMessagesProtoP\x01Z;eda-in-golang/notifications/notificationspb/notificationspb\xa2\x02\x03NXX\xaa\x02\x0fNotificationspb\xca\x02\x0fNotificationspb\xe2\x02\x1bNotificationspb\\GPBMetadata\xea\x02\x0fNotificationspbb\x06proto3"
+	"\x1enotificationspb/messages.proto\x12\x0fnotificationspbB\xce\x01\n" +
+	"\x13com.notificationspbB\rMessagesProtoP\x01ZLgithub.com/cuongpiger/mallbots/notifications/notificationspb/notificationspb\xa2\x02\x03NXX\xaa\x02\x0fNotificationspb\xca\x02\x0fNotificationspb\xe2\x02\x1bNotificationspb\\GPBMetadata\xea\x02\x0fNotificationspbb\x06proto3"
 
 var file_notificationspb_messages_proto_goTypes = []any{}
 var file_notificationspb_messages_proto_depIdxs = []int32{

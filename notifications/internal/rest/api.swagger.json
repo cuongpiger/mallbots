@@ -1,0 +1,192 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Notifications Operations",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "NotificationsService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/notifications/order-canceled": {
+      "post": {
+        "summary": "Notify that an order has been canceled",
+        "operationId": "notifyOrderCanceled",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notificationspbNotifyOrderCanceledResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/notificationspbNotifyOrderCanceledRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Notifications"
+        ]
+      }
+    },
+    "/api/notifications/order-created": {
+      "post": {
+        "summary": "Notify that an order has been created",
+        "operationId": "notifyOrderCreated",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notificationspbNotifyOrderCreatedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/notificationspbNotifyOrderCreatedRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Notifications"
+        ]
+      }
+    },
+    "/api/notifications/order-ready": {
+      "post": {
+        "summary": "Notify that an order is ready",
+        "operationId": "notifyOrderReady",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notificationspbNotifyOrderReadyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/notificationspbNotifyOrderReadyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Notifications"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "notificationspbNotifyOrderCanceledRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        }
+      }
+    },
+    "notificationspbNotifyOrderCanceledResponse": {
+      "type": "object"
+    },
+    "notificationspbNotifyOrderCreatedRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        }
+      }
+    },
+    "notificationspbNotifyOrderCreatedResponse": {
+      "type": "object"
+    },
+    "notificationspbNotifyOrderReadyRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        }
+      }
+    },
+    "notificationspbNotifyOrderReadyResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
